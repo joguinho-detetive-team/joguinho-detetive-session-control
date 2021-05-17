@@ -1,6 +1,8 @@
 import express from "express";
 import { config } from "dotenv";
 
+import { morganMiddleware } from "./utils";
+
 class App {
   public app: express.Application = express();
 
@@ -11,6 +13,7 @@ class App {
   }
 
   private middlewares() {
+    this.app.use(morganMiddleware);
     this.app.use(express.json({ limit: "50mb" }));
     this.app.use(
       express.urlencoded({
